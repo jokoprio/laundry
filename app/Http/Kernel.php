@@ -67,9 +67,6 @@ class Kernel extends HttpKernel
         'owner' => \App\Http\Middleware\OwnerMiddleware::class,
         'permission' => \App\Http\Middleware\CheckPermission::class,
         'admin_access' => \App\Http\Middleware\AdminAccessMiddleware::class,
-<<<<<<< HEAD
-=======
         'check_subscription' => \App\Http\Middleware\CheckSubscription::class,
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
     ];
 }
