@@ -37,12 +37,23 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin_access'])->gr
     Route::resource('coupons', App\Http\Controllers\Admin\CouponController::class);
     Route::resource('tenants', App\Http\Controllers\Admin\TenantController::class);
 
+<<<<<<< HEAD
+=======
+    // System Settings
+    Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::put('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
     // Profile & Password
     Route::get('/profile/change-password', [App\Http\Controllers\Admin\ProfileController::class, 'showChangePasswordForm'])->name('profile.change-password');
     Route::put('/profile/update-password', [App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('profile.update-password');
 });
 
+<<<<<<< HEAD
 Route::prefix('owner')->name('owner.')->middleware(['auth', 'owner'])->group(function () {
+=======
+Route::prefix('owner')->name('owner.')->middleware(['auth', 'owner', 'check_subscription'])->group(function () {
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
     Route::get('/dashboard', [App\Http\Controllers\Owner\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('inventory', App\Http\Controllers\Owner\InventoryController::class);
     Route::resource('services', App\Http\Controllers\Owner\ServiceController::class);
@@ -65,6 +76,19 @@ Route::prefix('owner')->name('owner.')->middleware(['auth', 'owner'])->group(fun
     // Users (Staff) Management
     Route::resource('users', App\Http\Controllers\Owner\OwnerUserController::class);
 
+<<<<<<< HEAD
+=======
+    // Branch Management
+    Route::resource('branches', App\Http\Controllers\Owner\BranchController::class);
+    Route::post('branches/{branch}/activate', [App\Http\Controllers\Owner\BranchController::class, 'activate'])->name('branches.activate');
+    Route::post('branches/switch', [App\Http\Controllers\Owner\BranchController::class, 'switch'])->name('branches.switch');
+    Route::resource('stock-mutations', App\Http\Controllers\Owner\StockMutationController::class);
+
+    // Maintenance (Data Reset)
+    Route::get('/maintenance', [App\Http\Controllers\Owner\MaintenanceController::class, 'index'])->name('maintenance.index');
+    Route::post('/maintenance/reset', [App\Http\Controllers\Owner\MaintenanceController::class, 'reset'])->name('maintenance.reset');
+
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
     // Settings
     Route::get('/settings', [App\Http\Controllers\Owner\SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [App\Http\Controllers\Owner\SettingController::class, 'update'])->name('settings.update');

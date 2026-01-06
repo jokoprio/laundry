@@ -15,7 +15,10 @@
                 <h3 class="text-2xl font-black text-white mb-2 tracking-tight">Aturan Program</h3>
                 <p class="text-blue-100 text-sm font-medium mb-8 leading-relaxed">Berikan reward pada pelanggan setia Anda
                     untuk meningkatkan retensi dan omzet.</p>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                 <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/10">
                     <p class="text-[12px] font-black text-blue-200 uppercase tracking-[0.2em] mb-2">Kurs Konversi Saat Ini
                     </p>
@@ -43,7 +46,19 @@
                 <div class="p-8 border-b border-slate-100 flex justify-between items-center bg-white">
                     <div>
                         <h3 class="text-xl font-extrabold text-slate-800">Poin Pelanggan</h3>
+<<<<<<< HEAD
                         <p class="text-xs text-slate-600 mt-1">Daftar saldo poin yang dimiliki oleh tiap member</p>
+=======
+                        <div class="flex items-center mt-1">
+                    <p class="text-xs text-slate-600">Daftar saldo poin yang dimiliki oleh tiap member</p>
+                    <span class="mx-2 text-slate-300">•</span>
+                    <span
+                        class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                        <i class="fas fa-building mr-1.5 opacity-50"></i>
+                        Cabang: {{ session('active_branch_name', 'Semua (Pusat)') }}
+                    </span>
+                </div>
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </div>
                 </div>
 

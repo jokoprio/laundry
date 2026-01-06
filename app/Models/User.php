@@ -9,10 +9,18 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+<<<<<<< HEAD
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuids;
+=======
+use App\Traits\HasBranch;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasBranch;
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +33,10 @@ class User extends Authenticatable
         'password',
         'role',
         'tenant_id',
+<<<<<<< HEAD
+=======
+        'branch_id',
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
         'permissions',
         'is_active',
     ];

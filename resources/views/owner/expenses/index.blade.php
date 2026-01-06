@@ -8,7 +8,19 @@
         <div class="p-8 border-b border-slate-100 flex justify-between items-center">
             <div>
                 <h3 class="text-xl font-extrabold text-slate-800">Riwayat Pengeluaran</h3>
+<<<<<<< HEAD
                 <p class="text-xs text-slate-600 mt-1">Pantau biaya operasional non-inventaris laundry Anda</p>
+=======
+                <div class="flex items-center mt-1">
+                    <p class="text-xs text-slate-600">Pantau biaya operasional non-inventaris laundry Anda</p>
+                    <span class="mx-2 text-slate-300">•</span>
+                    <span
+                        class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                        <i class="fas fa-building mr-1.5 opacity-50"></i>
+                        Cabang: {{ session('active_branch_name', 'Semua (Pusat)') }}
+                    </span>
+                </div>
+>>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
             </div>
             <button onclick="document.getElementById('createExpenseModal').classList.remove('hidden')"
                 class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-widest rounded-xl shadow-lg shadow-blue-500/20 active:scale-95 transition-all">
