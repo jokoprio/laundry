@@ -8,9 +8,6 @@
         <div class="p-8 border-b border-slate-100 flex justify-between items-center">
             <div>
                 <h3 class="text-xl font-extrabold text-slate-800">Item Stok</h3>
-<<<<<<< HEAD
-                <p class="text-xs text-slate-600 mt-1">Kelola persediaan dan aset laundry Anda</p>
-=======
                 <div class="flex items-center mt-1">
                     <p class="text-xs text-slate-600">Kelola persediaan dan aset laundry Anda</p>
                     <span class="mx-2 text-slate-300">•</span>
@@ -20,7 +17,6 @@
                         Cabang: {{ session('active_branch_name', 'Semua (Pusat)') }}
                     </span>
                 </div>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
             </div>
             <button onclick="document.getElementById('createItemModal').classList.remove('hidden')"
                 class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-widest rounded-xl shadow-lg shadow-blue-500/20 active:scale-95 transition-all">

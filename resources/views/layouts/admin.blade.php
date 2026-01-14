@@ -379,8 +379,6 @@
 
                 <!-- Action -->
                 <div class="section-header" x-text="sidebarOpen ? 'Sistem' : '•••'"></div>
-<<<<<<< HEAD
-=======
                 <li class="{{ request()->routeIs('admin.settings.*') ? 'active-page' : '' }}">
                     <b></b><b></b>
                     <a href="{{ route('admin.settings.index') }}">
@@ -389,7 +387,6 @@
                     </a>
                     <span class="hover-label">Pengaturan Sistem</span>
                 </li>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                 <li class="{{ request()->routeIs('admin.profile.*') ? 'active-page' : '' }}">
                     <b></b><b></b>
                     <a href="{{ route('admin.profile.change-password') }}">
@@ -506,9 +503,6 @@
     </div>
 
     @stack('scripts')
-<<<<<<< HEAD
-=======
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const activeItem = document.querySelector('.menu-list li.active-page');
@@ -520,7 +514,6 @@
             }
         });
     </script>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
 </body>
 
 </html>

@@ -298,8 +298,6 @@
     </style>
 </head>
 
-<<<<<<< HEAD
-=======
 @php
     $user = Auth::user();
     $tenant = $user->tenant;
@@ -309,7 +307,6 @@
     $indicator = $isActiveBranch ? '[C]' : '[P]';
 @endphp
 
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
 <body class="bg-owner-content text-slate-900 font-sans antialiased" x-data="{ sidebarOpen: true }">
 
     <div class="flex h-screen overflow-hidden">
@@ -323,17 +320,11 @@
                     class="w-10 h-10 bg-owner-primary rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 shrink-0">
                     <i class="fas fa-soap text-white"></i>
                 </div>
-<<<<<<< HEAD
-                <span
-                    class="ml-4 font-black text-2xl tracking-tighter text-white whitespace-nowrap overflow-hidden transition-all duration-300"
-                    :class="sidebarOpen ? 'opacity-100' : 'opacity-0 w-0 ml-0'">SiLondry</span>
-=======
                 <div class="flex flex-col ml-4 transition-all duration-300"
                     :class="sidebarOpen ? 'opacity-100' : 'opacity-0 w-0 ml-0'">
                     <span
                         class="font-black text-2xl tracking-tighter text-white whitespace-nowrap overflow-hidden">SiLondry</span>
                 </div>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
             </div>
 
             <ul class="menu-list flex-1">
@@ -344,12 +335,6 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.dashboard') }}">
                         <span class="icon"><i class="fas fa-th-large"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Dashboard</span>
-                    </a>
-                    <span class="hover-label">Dashboard</span>
-                </li>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Dashboard
                         </span>
@@ -368,7 +353,6 @@
                         <span class="hover-label">Kelola Cabang</span>
                     </li>
                 @endif
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
 
                 <!-- Operasional -->
                 <div class="section-header" x-text="sidebarOpen ? 'Operasional' : '•••'"></div>
@@ -376,13 +360,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.transactions.create') }}">
                         <span class="icon"><i class="fas fa-cash-register"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Kasir / POS</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Kasir / POS
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Kasir / POS</span>
                 </li>
@@ -390,13 +370,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.transactions.index') }}">
                         <span class="icon"><i class="fas fa-receipt"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Riwayat Transaksi</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Riwayat Transaksi
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Riwayat Transaksi</span>
                 </li>
@@ -404,13 +380,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.customers.index') }}">
                         <span class="icon"><i class="fas fa-user-group"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Pelanggan</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Pelanggan
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Pelanggan</span>
                 </li>
@@ -421,12 +393,6 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.inventory.index') }}">
                         <span class="icon"><i class="fas fa-box-archive"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Stok Barang</span>
-                    </a>
-                    <span class="hover-label">Stok Barang</span>
-                </li>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Stok Barang
                         </span>
@@ -443,18 +409,13 @@
                     </a>
                     <span class="hover-label">Mutasi Stok</span>
                 </li>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                 <li class="{{ request()->routeIs('owner.suppliers.*') ? 'active-page' : '' }}">
                     <b></b><b></b>
                     <a href="{{ route('owner.suppliers.index') }}">
                         <span class="icon"><i class="fas fa-truck-ramp-box"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Supplier</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Supplier
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Supplier</span>
                 </li>
@@ -462,45 +423,13 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.purchases.index') }}">
                         <span class="icon"><i class="fas fa-cart-shopping"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Pembelian</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Pembelian
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Pembelian</span>
                 </li>
 
-<<<<<<< HEAD
-                <!-- HRD -->
-                <div class="section-header" x-text="sidebarOpen ? 'Karyawan' : '•••'"></div>
-                <li class="{{ request()->routeIs('owner.employees.*') ? 'active-page' : '' }}">
-                    <b></b><b></b>
-                    <a href="{{ route('owner.employees.index') }}">
-                        <span class="icon"><i class="fas fa-users-gear"></i></span>
-                        <span class="title" x-show="sidebarOpen">Data Staff</span>
-                    </a>
-                    <span class="hover-label">Data Staff</span>
-                </li>
-                <li class="{{ request()->routeIs('owner.users.*') ? 'active-page' : '' }}">
-                    <b></b><b></b>
-                    <a href="{{ route('owner.users.index') }}">
-                        <span class="icon"><i class="fas fa-user-shield"></i></span>
-                        <span class="title" x-show="sidebarOpen">Kelola Akun Staff</span>
-                    </a>
-                    <span class="hover-label">Kelola Akun Staff</span>
-                </li>
-                <li class="{{ request()->routeIs('owner.payroll.*') ? 'active-page' : '' }}">
-                    <b></b><b></b>
-                    <a href="{{ route('owner.payroll.index') }}">
-                        <span class="icon"><i class="fas fa-money-check-dollar"></i></span>
-                        <span class="title" x-show="sidebarOpen">Penggajian</span>
-                    </a>
-                    <span class="hover-label">Penggajian</span>
-                </li>
-=======
                 @if(Auth::user()->role === 'owner')
                     <!-- HRD -->
                     <div class="section-header" x-text="sidebarOpen ? 'Karyawan' : '•••'"></div>
@@ -535,7 +464,6 @@
                         <span class="hover-label">Penggajian</span>
                     </li>
                 @endif
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
 
                 <!-- Finance -->
                 <div class="section-header" x-text="sidebarOpen ? 'Keuangan' : '•••'"></div>
@@ -543,13 +471,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.reports.finance') }}">
                         <span class="icon"><i class="fas fa-file-invoice-dollar"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Laporan Laba Rugi</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Laporan Laba Rugi
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Laporan Laba Rugi</span>
                 </li>
@@ -557,13 +481,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.expenses.index') }}">
                         <span class="icon"><i class="fas fa-wallet"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Pengeluaran</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Pengeluaran
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Pengeluaran</span>
                 </li>
@@ -571,13 +491,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.services.index') }}">
                         <span class="icon"><i class="fas fa-tags"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Layanan & Harga</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Layanan & Harga
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Layanan & Harga</span>
                 </li>
@@ -588,13 +504,9 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.membership-levels.index') }}">
                         <span class="icon"><i class="fas fa-id-card-clip"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Level Member</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Level Member
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Level Member</span>
                 </li>
@@ -602,29 +514,15 @@
                     <b></b><b></b>
                     <a href="{{ route('owner.loyalty.index') }}">
                         <span class="icon"><i class="fas fa-gift"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Loyalty Program</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Loyalty Program
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Loyalty Program</span>
                 </li>
 
                 <!-- Action -->
                 <div class="section-header" x-text="sidebarOpen ? 'Sistem' : '•••'"></div>
-<<<<<<< HEAD
-                <li class="{{ request()->routeIs('owner.settings.*') ? 'active-page' : '' }}">
-                    <b></b><b></b>
-                    <a href="{{ route('owner.settings.index') }}">
-                        <span class="icon"><i class="fas fa-store"></i></span>
-                        <span class="title" x-show="sidebarOpen">Identitas Bisnis</span>
-                    </a>
-                    <span class="hover-label">Identitas Bisnis</span>
-                </li>
-=======
                 @if(Auth::user()->role === 'owner')
                     <li class="{{ request()->routeIs('owner.settings.*') ? 'active-page' : '' }}">
                         <b></b><b></b>
@@ -647,31 +545,22 @@
                         <span class="hover-label">Pemeliharaan Data</span>
                     </li>
                 @endif
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                 <li class="{{ request()->routeIs('owner.profile.*') ? 'active-page' : '' }}">
                     <b></b><b></b>
                     <a href="{{ route('owner.profile.change-password') }}">
                         <span class="icon"><i class="fas fa-key"></i></span>
-<<<<<<< HEAD
-                        <span class="title" x-show="sidebarOpen">Ganti Password</span>
-=======
                         <span class="title" x-show="sidebarOpen">
                             Ganti Password
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Ganti Password</span>
                 </li>
                 <li>
                     <a href="javascript:void(0)" onclick="document.getElementById('logout-form').submit()">
                         <span class="icon text-red-400"><i class="fas fa-power-off"></i></span>
-<<<<<<< HEAD
-                        <span class="title text-red-400" x-show="sidebarOpen">Keluar Aplikasi</span>
-=======
                         <span class="title text-red-400" x-show="sidebarOpen">
                             Keluar Aplikasi
                         </span>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </a>
                     <span class="hover-label">Keluar Aplikasi</span>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
@@ -690,13 +579,9 @@
                     <div class="ml-3 overflow-hidden transition-all duration-300"
                         :class="sidebarOpen ? 'opacity-100' : 'opacity-0 w-0'">
                         <p class="text-xs font-bold text-white truncate">{{ Auth::user()->name }}</p>
-<<<<<<< HEAD
-                        <p class="text-[9px] text-slate-500 font-bold uppercase mt-0.5">Business Owner</p>
-=======
                         <p class="text-[9px] text-slate-500 font-bold uppercase mt-0.5">
                             {{ Auth::user()->role_display_name }}
                         </p>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                     </div>
                 </div>
             </div>
@@ -715,8 +600,6 @@
                     <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight">@yield('header')</h2>
                 </div>
 
-<<<<<<< HEAD
-=======
                 @if($hasBranches)
                     <div class="hidden lg:flex items-center">
                         <div
@@ -730,7 +613,6 @@
                     </div>
                 @endif
 
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
                 <div class="flex items-center space-x-6">
                     <div
                         class="flex items-center space-x-2 px-3 py-1.5 rounded-2xl bg-slate-50 border border-slate-100">
@@ -780,8 +662,6 @@
     </div>
 
     @stack('scripts')
-<<<<<<< HEAD
-=======
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const activeItem = document.querySelector('.menu-list li.active-page');
@@ -793,7 +673,6 @@
             }
         });
     </script>
->>>>>>> 9513f9d9f392a3b2852b4daca22d48e1b98290df
 </body>
 
 </html>
