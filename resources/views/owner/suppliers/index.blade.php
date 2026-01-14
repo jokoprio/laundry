@@ -94,6 +94,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($suppliers->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $suppliers->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Add Modal -->

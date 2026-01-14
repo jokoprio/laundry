@@ -21,7 +21,7 @@
                     </div>
                     <div>
                         <h3 class="text-xl font-extrabold text-white">
-                            {{ isset($user) ? 'Edit Data Staff' : 'Registrasi Staff Baru' }}
+                            {{ isset($user) ? 'Edit Data Karyawan' : 'Registrasi Staff Baru' }}
                         </h3>
                         <p class="text-indigo-100 text-sm mt-1">Lengkapi informasi staff outlet</p>
                     </div>

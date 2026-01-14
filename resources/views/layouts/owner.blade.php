@@ -429,6 +429,16 @@
                     </a>
                     <span class="hover-label">Pembelian</span>
                 </li>
+                <li class="{{ request()->routeIs('owner.purchase-payments.*') ? 'active-page' : '' }}">
+                    <b></b><b></b>
+                    <a href="{{ route('owner.purchase-payments.index') }}">
+                        <span class="icon"><i class="fas fa-money-bill-transfer"></i></span>
+                        <span class="title" x-show="sidebarOpen">
+                            Lacak Pembayaran
+                        </span>
+                    </a>
+                    <span class="hover-label">Lacak Pembayaran</span>
+                </li>
 
                 @if(Auth::user()->role === 'owner')
                     <!-- HRD -->
@@ -438,10 +448,10 @@
                         <a href="{{ route('owner.employees.index') }}">
                             <span class="icon"><i class="fas fa-users-gear"></i></span>
                             <span class="title" x-show="sidebarOpen">
-                                Data Staff
+                                Data Karyawan
                             </span>
                         </a>
-                        <span class="hover-label">Data Staff</span>
+                        <span class="hover-label">Data Karyawan</span>
                     </li>
                     <li class="{{ request()->routeIs('owner.users.*') ? 'active-page' : '' }}">
                         <b></b><b></b>

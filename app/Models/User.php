@@ -11,9 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Traits\HasBranch;
 
+use App\Traits\LogsActivity;
+
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasBranch;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasBranch, LogsActivity;
 
     /**
      * The attributes that are mass assignable.

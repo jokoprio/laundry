@@ -377,6 +377,15 @@
                     <span class="hover-label">Kupon Diskon</span>
                 </li>
 
+                <li class="{{ request()->routeIs('admin.activity-logs.index') ? 'active-page' : '' }}">
+                    <b></b><b></b>
+                    <a href="{{ route('admin.activity-logs.index') }}">
+                        <span class="icon"><i class="fas fa-history"></i></span>
+                        <span class="title" x-show="sidebarOpen">Log Aktivitas</span>
+                    </a>
+                    <span class="hover-label">Log Aktivitas</span>
+                </li>
+
                 <!-- Action -->
                 <div class="section-header" x-text="sidebarOpen ? 'Sistem' : '•••'"></div>
                 <li class="{{ request()->routeIs('admin.settings.*') ? 'active-page' : '' }}">

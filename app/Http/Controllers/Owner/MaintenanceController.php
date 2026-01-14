@@ -213,7 +213,7 @@ class MaintenanceController extends Controller
             $hint = '';
 
             if (str_contains($errorMsg, 'foreign key constraint') || str_contains($errorMsg, 'FOREIGN KEY')) {
-                $hint = ' PETUNJUK: Beberapa data memiliki ketergantungan. Coba hapus dalam urutan ini: 1) Riwayat Transaksi, 2) Pelanggan, 3) Layanan & Harga, 4) Data Staff, 5) Stok Barang, 6) Supplier, 7) Data Cabang.';
+                $hint = ' PETUNJUK: Beberapa data memiliki ketergantungan. Coba hapus dalam urutan ini: 1) Riwayat Transaksi, 2) Pelanggan, 3) Layanan & Harga, 4) Data Karyawan, 5) Stok Barang, 6) Supplier, 7) Data Cabang.';
             }
 
             return redirect()->back()->with('error', 'Gagal mereset data: ' . $errorMsg . $hint);

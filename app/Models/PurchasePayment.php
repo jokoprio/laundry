@@ -5,27 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use App\Traits\HasBranch;
-use App\Models\Tenant;
 
-use App\Traits\LogsActivity;
-
-class Expense extends Model
+class PurchasePayment extends Model
 {
-    use HasFactory, HasUuids, HasBranch, LogsActivity;
+    use HasFactory, HasUuids;
 
-    protected $fillable = [
-        'tenant_id',
-        'category',
-        'amount',
-        'date',
-        'description',
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
-        'date' => 'date',
+        'payment_date' => 'date',
         'amount' => 'decimal:2',
     ];
+
+    public function purchaseOrder()
+    {
+        return $this->belongsTo(PurchaseOrder::class);
+    }
 
     public function tenant()
     {

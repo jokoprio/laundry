@@ -104,6 +104,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($coupons->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $coupons->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Create Coupon Modal -->

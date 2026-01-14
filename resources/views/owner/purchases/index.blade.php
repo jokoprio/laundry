@@ -38,11 +38,15 @@
                             Item yang Dibeli
                         </th>
                         <th scope="col" class="px-6 py-5 text-[12px] font-bold text-slate-500 uppercase tracking-[0.2em]">
-                            Total Belanja (IDR)
+                            Total / Dibayar
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-5 text-center text-[12px] font-bold text-slate-500 uppercase tracking-[0.2em]">
+                            Status Bayar
                         </th>
                         <th scope="col"
                             class="px-8 py-5 text-center text-[12px] font-bold text-slate-500 uppercase tracking-[0.2em]">
-                            Status
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -76,19 +80,57 @@
                             </td>
                             <td class="px-6 py-6 whitespace-nowrap">
                                 <div class="text-sm font-black text-slate-800">
-                                    {{ number_format($purchase->total_amount, 0, ',', '.') }}
+                                    Rp {{ number_format($purchase->total_amount, 0, ',', '.') }}
                                 </div>
+                                @if($purchase->payment_method !== 'cash')
+                                    <div class="text-[11px] font-bold text-emerald-600">
+                                        Dibayar: Rp {{ number_format($purchase->paid_amount, 0, ',', '.') }}
+                                    </div>
+                                    @if($purchase->remaining_amount > 0)
+                                        <div class="text-[11px] font-bold text-red-600">
+                                            Sisa: Rp {{ number_format($purchase->remaining_amount, 0, ',', '.') }}
+                                        </div>
+                                    @endif
+                                @endif
                             </td>
-                            <td class="px-8 py-6 whitespace-nowrap text-center">
-                                <span
-                                    class="inline-flex items-center px-3 py-1 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-full text-[12px] font-black uppercase tracking-widest shadow-sm shadow-emerald-500/5">
-                                    <i class="fas fa-box-open mr-2"></i> Diterima
-                                </span>
+                            <td class="px-6 py-6 whitespace-nowrap text-center">
+                                @if($purchase->payment_status === 'paid')
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 bg-emerald-50 text-emerald-600 border border-emerald-100 rounded-full text-[12px] font-black uppercase tracking-widest shadow-sm shadow-emerald-500/5">
+                                        <i class="fas fa-check-circle mr-2"></i> Lunas
+                                    </span>
+                                @elseif($purchase->payment_status === 'partial')
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 bg-amber-50 text-amber-600 border border-amber-100 rounded-full text-[12px] font-black uppercase tracking-widest shadow-sm shadow-amber-500/5">
+                                        <i class="fas fa-clock mr-2"></i> Cicilan
+                                    </span>
+                                @else
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 bg-red-50 text-red-600 border border-red-100 rounded-full text-[12px] font-black uppercase tracking-widest shadow-sm shadow-red-500/5">
+                                        <i class="fas fa-exclamation-circle mr-2"></i> Hutang
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="px-8 py-6 whitespace-nowrap text-center space-x-2">
+                                <a href="{{ route('owner.purchases.edit', $purchase) }}"
+                                    class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-[11px] font-black uppercase tracking-tighter rounded-xl shadow-lg shadow-blue-500/20 active:scale-95 transition-all"
+                                    title="Edit Pembelian">
+                                    <i class="fas fa-edit mr-2"></i> Edit
+                                </a>
+                                <form action="{{ route('owner.purchases.destroy', $purchase) }}" method="POST" class="inline"
+                                    onsubmit="return confirm('Hapus pembelian ini? Stok akan disesuaikan.');">
+                                    @csrf @method('DELETE')
+                                    <button type="submit"
+                                        class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-[11px] font-black uppercase tracking-tighter rounded-xl shadow-lg shadow-red-500/20 active:scale-95 transition-all"
+                                        title="Hapus Pembelian">
+                                        <i class="fas fa-trash-alt mr-2"></i> Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-8 py-16 text-center">
+                            <td colspan="6" class="px-8 py-16 text-center">
                                 <div class="flex flex-col items-center">
                                     <div
                                         class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4 text-slate-200">
@@ -103,5 +145,11 @@
                 </tbody>
             </table>
         </div>
+
+        @if($purchases->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $purchases->links() }}
+            </div>
+        @endif
     </div>
 @endsection

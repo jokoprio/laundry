@@ -17,7 +17,7 @@ class CustomerController extends Controller
     {
         $customers = Customer::where('tenant_id', Auth::user()->tenant_id)
             ->with('membershipLevel')
-            ->get();
+            ->paginate(10);
         $levels = MembershipLevel::where('tenant_id', Auth::user()->tenant_id)->get();
         return view('owner.customers.index', compact('customers', 'levels'));
     }

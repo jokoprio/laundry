@@ -55,7 +55,7 @@
                             ['id' => 'stock_mutations', 'name' => 'Mutasi Stok', 'icon' => 'fa-exchange-alt', 'desc' => 'Menghapus riwayat pindah barang'],
                             ['id' => 'suppliers', 'name' => 'Supplier', 'icon' => 'fa-truck-field', 'desc' => 'Menghapus daftar mitra penyuplai'],
                             ['id' => 'purchases', 'name' => 'Pembelian', 'icon' => 'fa-shopping-cart', 'desc' => 'Menghapus riwayat belanja bahan'],
-                            ['id' => 'employees', 'name' => 'Data Staff', 'icon' => 'fa-vcard', 'desc' => 'Menghapus data karyawan'],
+                            ['id' => 'employees', 'name' => 'Data Karyawan', 'icon' => 'fa-vcard', 'desc' => 'Menghapus data karyawan'],
                             ['id' => 'users', 'name' => 'Akun Login Staff', 'icon' => 'fa-user-lock', 'desc' => 'Menghapus akses login (kecuali anda)'],
                             ['id' => 'payroll', 'name' => 'Penggajian', 'icon' => 'fa-wallet', 'desc' => 'Menghapus riwayat bayar gaji'],
                             ['id' => 'expenses', 'name' => 'Pengeluaran', 'icon' => 'fa-file-invoice-dollar', 'desc' => 'Menghapus biaya operasional'],
@@ -78,7 +78,8 @@
                                     <span class="ml-3 font-black text-slate-800 tracking-tight">{{ $cat['name'] }}</span>
                                 </div>
                                 <p class="text-[11px] text-slate-500 font-bold leading-snug uppercase tracking-tighter">
-                                    {{ $cat['desc'] }}</p>
+                                    {{ $cat['desc'] }}
+                                </p>
                             </div>
                             <div class="absolute top-4 right-4 opacity-0 peer-checked:opacity-100 transition-opacity">
                                 <div

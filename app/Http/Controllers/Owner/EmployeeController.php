@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::where('tenant_id', Auth::user()->tenant_id)->latest()->get();
+        $employees = Employee::where('tenant_id', Auth::user()->tenant_id)->latest()->paginate(10);
         return view('owner.employees.index', compact('employees'));
     }
 

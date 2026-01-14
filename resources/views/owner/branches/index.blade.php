@@ -53,7 +53,7 @@
                     </select>
                     <button type="submit"
                         class="bg-white text-slate-900 px-6 py-3 rounded-xl font-bold text-sm hover:bg-blue-500 hover:text-white transition-all active:scale-95">
-                        Ganti
+                        Pindah
                     </button>
                 </form>
             </div>

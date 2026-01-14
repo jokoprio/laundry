@@ -110,6 +110,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($employees->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $employees->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Create Modal -->

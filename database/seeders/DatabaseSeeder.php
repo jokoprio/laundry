@@ -12,11 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Tambahkan semua seeder yang ingin dijalankan saat --seed di sini
-        $this->call([
-            SuperAdminSeeder::class,
-            // Tambah seeder lain di bawah ini jika perlu
-            // PermissionSeeder::class,
-        ]);
+        $this->call(DefaultDataSeeder::class);
     }
 }

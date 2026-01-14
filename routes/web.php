@@ -44,6 +44,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin_access'])->gr
     // Profile & Password
     Route::get('/profile/change-password', [App\Http\Controllers\Admin\ProfileController::class, 'showChangePasswordForm'])->name('profile.change-password');
     Route::put('/profile/update-password', [App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('profile.update-password');
+
+    // Activity Logs
+    Route::get('/activity-logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])->name('activity-logs.index');
 });
 
 Route::prefix('owner')->name('owner.')->middleware(['auth', 'owner', 'check_subscription'])->group(function () {
@@ -61,6 +64,14 @@ Route::prefix('owner')->name('owner.')->middleware(['auth', 'owner', 'check_subs
     Route::post('customers/{customer}/topup', [App\Http\Controllers\Owner\CustomerController::class, 'topup'])->name('customers.topup');
     Route::resource('suppliers', App\Http\Controllers\Owner\SupplierController::class);
     Route::resource('purchases', App\Http\Controllers\Owner\PurchaseController::class);
+
+    // Purchase Payments (Installment/Debt Tracking)
+    Route::prefix('purchase-payments')->name('purchase-payments.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Owner\PurchasePaymentController::class, 'index'])->name('index');
+        Route::get('/{purchase}', [App\Http\Controllers\Owner\PurchasePaymentController::class, 'show'])->name('show');
+        Route::post('/{purchase}', [App\Http\Controllers\Owner\PurchasePaymentController::class, 'store'])->name('store');
+    });
+
     Route::resource('membership-levels', App\Http\Controllers\Owner\MembershipLevelController::class);
 
     Route::get('/loyalty', [App\Http\Controllers\Owner\LoyaltyController::class, 'index'])->name('loyalty.index');

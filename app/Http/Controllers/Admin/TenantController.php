@@ -10,7 +10,7 @@ class TenantController extends Controller
 {
     public function index()
     {
-        $tenants = Tenant::with('subscriptionPackage')->get();
+        $tenants = Tenant::with('subscriptionPackage')->paginate(10);
         return view('admin.tenants.index', compact('tenants'));
     }
     public function destroy(Request $request, Tenant $tenant)

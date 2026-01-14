@@ -20,7 +20,7 @@ class TransactionController extends Controller
         $transactions = Transaction::where('tenant_id', Auth::user()->tenant_id)
             ->with(['items.service', 'customer'])
             ->latest()
-            ->get();
+            ->paginate(10);
         return view('owner.transactions.index', compact('transactions'));
     }
 

@@ -10,7 +10,7 @@ class PackageController extends Controller
 {
     public function index()
     {
-        $packages = SubscriptionPackage::all();
+        $packages = SubscriptionPackage::paginate(10);
         return view('admin.packages.index', compact('packages'));
     }
 
