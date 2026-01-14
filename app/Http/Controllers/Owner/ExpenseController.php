@@ -11,7 +11,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::where('tenant_id', Auth::user()->tenant_id)->latest('date')->get();
+        $expenses = Expense::where('tenant_id', Auth::user()->tenant_id)->latest('date')->paginate(10);
         return view('owner.expenses.index', compact('expenses'));
     }
 

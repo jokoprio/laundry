@@ -33,12 +33,12 @@ class RevenueReportController extends Controller
                 Carbon::parse($endDate)->endOfDay() // Use endOfDay to include the last day fully
             ])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
 
-        $totalRevenue = $tenants->sum(fn($t) => $t->subscriptionPackage->price ?? 0);
+        $totalRevenue = $tenants->getCollection()->sum(fn($t) => $t->subscriptionPackage->price ?? 0);
 
         // Chart Data (Group by Day)
-        $chartData = $tenants->groupBy(function ($date) {
+        $chartData = $tenants->getCollection()->groupBy(function ($date) {
             return Carbon::parse($date->created_at)->format('Y-m-d');
         })->map(function ($dayTenants) {
             return $dayTenants->sum(fn($t) => $t->subscriptionPackage->price ?? 0);

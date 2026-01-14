@@ -123,6 +123,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($customers->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $customers->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Add Modal -->

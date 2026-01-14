@@ -1,7 +1,7 @@
 @extends('layouts.owner')
 
-@section('title', 'Belanja Bahan')
-@section('header', 'Catat Belanja Bahan')
+@section('title', 'Edit Pembelian')
+@section('header', 'Edit Data Pembelian')
 
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet">
@@ -51,19 +51,19 @@
                 </div>
             </div>
 
-            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start">
-                <i class="fas fa-info-circle text-blue-500 mt-1 mr-3"></i>
-                <p class="text-xs text-blue-700 leading-relaxed">
-                    Setiap belanja yang dicatat akan otomatis menambah stok dan memperbarui harga rata-rata bahan. Transaksi
-                    juga akan langsung muncul di laporan pengeluaran.
+            <div class="bg-amber-50 border border-amber-100 rounded-xl p-4 flex items-start">
+                <i class="fas fa-exclamation-triangle text-amber-500 mt-1 mr-3"></i>
+                <p class="text-xs text-amber-700 leading-relaxed">
+                    Mengubah pembelian akan menyesuaikan stok barang. Pastikan data yang diinput sudah benar.
                 </p>
             </div>
         </div>
 
         <!-- Right: Cart & Summary -->
         <div class="lg:col-span-2">
-            <form action="{{ route('owner.purchases.store') }}" method="POST" id="purchaseForm">
+            <form action="{{ route('owner.purchases.update', $purchase) }}" method="POST" id="purchaseForm">
                 @csrf
+                @method('PUT')
                 <div
                     class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden min-h-[500px] flex flex-col">
                     <!-- Header -->
@@ -76,9 +76,63 @@
                             <select name="supplier_id" id="supplier_select" required placeholder="Pilih Supplier...">
                                 <option value="">-- Pilih Supplier --</option>
                                 @foreach($suppliers as $supplier)
-                                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                    <option value="{{ $supplier->id }}" {{ $purchase->supplier_id == $supplier->id ? 'selected' : '' }}>
+                                        {{ $supplier->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Section -->
+                    <div class="p-6 bg-blue-50 border-b border-blue-100">
+                        <h4 class="text-sm font-bold text-slate-700 mb-3">Metode Pembayaran</h4>
+                        <div class="grid grid-cols-3 gap-3 mb-4">
+                            <label class="relative flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-400"
+                                :class="paymentMethod === 'cash' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'">
+                                <input type="radio" name="payment_method" value="cash" class="sr-only" 
+                                    {{ $purchase->payment_method == 'cash' ? 'checked' : '' }}
+                                    @click="paymentMethod = 'cash'">
+                                <div class="text-center">
+                                    <i class="fas fa-money-bill-wave text-green-500 text-xl mb-1"></i>
+                                    <div class="text-xs font-bold">Lunas</div>
+                                </div>
+                            </label>
+                            <label class="relative flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-400"
+                                :class="paymentMethod === 'debt' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'">
+                                <input type="radio" name="payment_method" value="debt" class="sr-only"
+                                    {{ $purchase->payment_method == 'debt' ? 'checked' : '' }}
+                                    @click="paymentMethod = 'debt'">
+                                <div class="text-center">
+                                    <i class="fas fa-hand-holding-usd text-red-500 text-xl mb-1"></i>
+                                    <div class="text-xs font-bold">Hutang</div>
+                                </div>
+                            </label>
+                            <label class="relative flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-400"
+                                :class="paymentMethod === 'installment' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'">
+                                <input type="radio" name="payment_method" value="installment" class="sr-only"
+                                    {{ $purchase->payment_method == 'installment' ? 'checked' : '' }}
+                                    @click="paymentMethod = 'installment'">
+                                <div class="text-center">
+                                    <i class="fas fa-calendar-alt text-blue-500 text-xl mb-1"></i>
+                                    <div class="text-xs font-bold">Cicilan</div>
+                                </div>
+                            </label>
+                        </div>
+                        <div x-show="paymentMethod !== 'cash'" class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 ml-1">Dibayar Sekarang</label>
+                                <input type="number" name="paid_amount" step="1" 
+                                    value="{{ $purchase->paid_amount }}"
+                                    class="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-base font-black text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none shadow-sm"
+                                    :required="paymentMethod !== 'cash'">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 ml-1">Jatuh Tempo</label>
+                                <input type="date" name="due_date" 
+                                    value="{{ $purchase->due_date ? $purchase->due_date->format('Y-m-d') : '' }}"
+                                    class="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-base font-black text-slate-800 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none shadow-sm">
+                            </div>
                         </div>
                     </div>
 
@@ -105,60 +159,6 @@
                         </table>
                     </div>
 
-                    <!-- Payment Method Section -->
-                    <div class="p-6 bg-blue-50 border-t border-blue-100" x-data="{ paymentMethod: 'cash' }">
-                        <h4 class="text-sm font-bold text-slate-700 mb-3">Metode Pembayaran</h4>
-                        <div class="grid grid-cols-3 gap-3 mb-4">
-                            <label
-                                class="relative flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-400"
-                                :class="paymentMethod === 'cash' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'">
-                                <input type="radio" name="payment_method" value="cash" class="sr-only" checked
-                                    @click="paymentMethod = 'cash'">
-                                <div class="text-center">
-                                    <i class="fas fa-money-bill-wave text-green-500 text-xl mb-1"></i>
-                                    <div class="text-xs font-bold">Lunas</div>
-                                </div>
-                            </label>
-                            <label
-                                class="relative flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-400"
-                                :class="paymentMethod === 'debt' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'">
-                                <input type="radio" name="payment_method" value="debt" class="sr-only"
-                                    @click="paymentMethod = 'debt'">
-                                <div class="text-center">
-                                    <i class="fas fa-hand-holding-usd text-red-500 text-xl mb-1"></i>
-                                    <div class="text-xs font-bold">Hutang</div>
-                                </div>
-                            </label>
-                            <label
-                                class="relative flex items-center justify-center p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-blue-400"
-                                :class="paymentMethod === 'installment' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 bg-white'">
-                                <input type="radio" name="payment_method" value="installment" class="sr-only"
-                                    @click="paymentMethod = 'installment'">
-                                <div class="text-center">
-                                    <i class="fas fa-calendar-alt text-blue-500 text-xl mb-1"></i>
-                                    <div class="text-xs font-bold">Cicilan</div>
-                                </div>
-                            </label>
-                        </div>
-                        <div x-show="paymentMethod !== 'cash'" class="grid grid-cols-2 gap-4" style="display: none;">
-                            <div>
-                                <label
-                                    class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 ml-1">Dibayar
-                                    Sekarang</label>
-                                <input type="number" name="paid_amount" step="1" value="0"
-                                    class="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-base font-black text-slate-800 placeholder-slate-400 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none shadow-sm"
-                                    :required="paymentMethod !== 'cash'">
-                            </div>
-                            <div>
-                                <label
-                                    class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5 ml-1">Jatuh
-                                    Tempo</label>
-                                <input type="date" name="due_date"
-                                    class="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-base font-black text-slate-800 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none shadow-sm">
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Footer -->
                     <div class="p-6 bg-gray-50 border-t border-gray-200">
                         <div class="flex flex-col md:flex-row justify-between items-center gap-6">
@@ -174,10 +174,16 @@
                             </div>
                         </div>
 
-                        <button type="submit" id="submitBtn" disabled
-                            class="w-full mt-6 bg-green-600 hover:bg-green-700 disabled:bg-gray-200 disabled:text-gray-400 text-white font-black py-4 rounded-xl shadow-lg transition-all text-lg uppercase tracking-widest active:scale-95">
-                            Simpan Pembelian & Update Stok
-                        </button>
+                        <div class="flex gap-3 mt-6">
+                            <a href="{{ route('owner.purchases.index') }}"
+                                class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-black py-4 rounded-xl shadow-lg transition-all text-center text-lg uppercase tracking-widest active:scale-95">
+                                Batal
+                            </a>
+                            <button type="submit" id="submitBtn" disabled
+                                class="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-200 disabled:text-gray-400 text-white font-black py-4 rounded-xl shadow-lg transition-all text-lg uppercase tracking-widest active:scale-95">
+                                Update Pembelian
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div id="hiddenInputs"></div>
@@ -188,6 +194,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
     <script>
         let cart = [];
+        let paymentMethod = '{{ $purchase->payment_method }}';
 
         document.addEventListener('DOMContentLoaded', function () {
             new TomSelect('#supplier_select', { create: false });
@@ -202,6 +209,19 @@
                     }
                 }
             });
+
+            // Load existing items
+            @foreach($purchase->items as $item)
+                cart.push({
+                    id: '{{ $item->inventory_item_id }}',
+                    name: '{{ $item->inventoryItem->name }}',
+                    unit: '{{ $item->inventoryItem->unit }}',
+                    qty: {{ $item->qty }},
+                    cost: {{ $item->cost }}
+                });
+            @endforeach
+
+            renderCart();
         });
 
         function addToCart() {
@@ -217,7 +237,7 @@
             const existing = cart.findIndex(i => i.id === itemId);
             if (existing > -1) {
                 cart[existing].qty += qty;
-                cart[existing].cost = cost; // Update with latest cost
+                cart[existing].cost = cost;
             } else {
                 cart.push({
                     id: itemId,
@@ -263,29 +283,29 @@
                 grandTotal += sub;
 
                 body.insertAdjacentHTML('beforeend', `
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4">
-                                    <div class="font-bold text-gray-900">${item.name}</div>
-                                    <div class="text-xs text-gray-400">ID: ${item.id.substring(0, 8)}</div>
-                                </td>
-                                <td class="px-6 py-4 text-right text-sm text-gray-600">Rp ${new Intl.NumberFormat('id-ID').format(item.cost)}</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg font-medium">${item.qty} ${item.unit}</span>
-                                </td>
-                                <td class="px-6 py-4 text-right font-bold text-gray-900">Rp ${new Intl.NumberFormat('id-ID').format(sub)}</td>
-                                <td class="px-6 py-4 text-center">
-                                    <button type="button" onclick="remove(${i})" class="text-red-400 hover:text-red-600 transition-colors">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        `);
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4">
+                            <div class="font-bold text-gray-900">${item.name}</div>
+                            <div class="text-xs text-gray-400">ID: ${item.id.substring(0, 8)}</div>
+                        </td>
+                        <td class="px-6 py-4 text-right text-sm text-gray-600">Rp ${new Intl.NumberFormat('id-ID').format(item.cost)}</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-lg font-medium">${item.qty} ${item.unit}</span>
+                        </td>
+                        <td class="px-6 py-4 text-right font-bold text-gray-900">Rp ${new Intl.NumberFormat('id-ID').format(sub)}</td>
+                        <td class="px-6 py-4 text-center">
+                            <button type="button" onclick="remove(${i})" class="text-red-400 hover:text-red-600 transition-colors">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `);
 
                 hidden.insertAdjacentHTML('beforeend', `
-                            <input type="hidden" name="items[${i}][inventory_item_id]" value="${item.id}">
-                            <input type="hidden" name="items[${i}][qty]" value="${item.qty}">
-                            <input type="hidden" name="items[${i}][cost]" value="${item.cost}">
-                        `);
+                    <input type="hidden" name="items[${i}][inventory_item_id]" value="${item.id}">
+                    <input type="hidden" name="items[${i}][qty]" value="${item.qty}">
+                    <input type="hidden" name="items[${i}][cost]" value="${item.cost}">
+                `);
             });
 
             document.getElementById('grandTotal').innerText = new Intl.NumberFormat('id-ID').format(grandTotal);

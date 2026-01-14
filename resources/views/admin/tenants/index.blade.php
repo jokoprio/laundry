@@ -105,6 +105,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($tenants->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $tenants->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Delete Confirmation Modal -->

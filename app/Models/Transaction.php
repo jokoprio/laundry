@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Traits\HasBranch;
 use App\Models\Tenant;
 
+use App\Traits\LogsActivity;
+
 class Transaction extends Model
 {
-    use HasFactory, HasUuids, HasBranch;
+    use HasFactory, HasUuids, HasBranch, LogsActivity;
 
     protected $guarded = ['id'];
 

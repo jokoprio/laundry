@@ -110,12 +110,12 @@
                                     <!-- Pembayaran (PAID/UNPAID) -->
                                     <td class="px-6 py-6 whitespace-nowrap text-center">
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-[12px] font-black uppercase tracking-tighter
-                                                                                                    {{ $transaction->payment_status === 'paid'
+                                                                                                                    {{ $transaction->payment_status === 'paid'
                         ? 'bg-emerald-50 text-emerald-700 border border-emerald-100'
                         : 'bg-red-50 text-red-700 border border-red-100' }}">
                                             <span
                                                 class="w-1.5 h-1.5 rounded-full mr-2
-                                                                                                        {{ $transaction->payment_status === 'paid' ? 'bg-emerald-500' : 'bg-red-500' }}"></span>
+                                                                                                                        {{ $transaction->payment_status === 'paid' ? 'bg-emerald-500' : 'bg-red-500' }}"></span>
                                             {{ $transaction->payment_status === 'paid' ? 'Paid' : 'Unpaid' }}
                                         </span>
                                     </td>
@@ -185,6 +185,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($transactions->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $transactions->links() }}
+            </div>
+        @endif
     </div>
 
     <style>

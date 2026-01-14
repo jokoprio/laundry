@@ -107,6 +107,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($packages->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $packages->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Create Package Modal -->

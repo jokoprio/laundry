@@ -11,7 +11,7 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = Supplier::where('tenant_id', Auth::user()->tenant_id)->get();
+        $suppliers = Supplier::where('tenant_id', Auth::user()->tenant_id)->paginate(10);
         return view('owner.suppliers.index', compact('suppliers'));
     }
 

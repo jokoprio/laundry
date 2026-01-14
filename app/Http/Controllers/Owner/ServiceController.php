@@ -14,7 +14,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::where('tenant_id', Auth::user()->tenant_id)->with('materials.inventoryItem')->get();
+        $services = Service::where('tenant_id', Auth::user()->tenant_id)->with('materials.inventoryItem')->paginate(10);
         $inventoryItems = InventoryItem::where('tenant_id', Auth::user()->tenant_id)->get();
         return view('owner.services.index', compact('services', 'inventoryItems'));
     }

@@ -108,6 +108,12 @@
                 </tbody>
             </table>
         </div>
+
+        @if($services->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $services->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Create Modal -->
@@ -119,7 +125,7 @@
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
             <div
-                class="inline-block align-bottom bg-white rounded-[2.5rem] text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full border border-slate-100">
+                class="inline-block align-bottom bg-white rounded-[2.5rem] text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full border border-slate-100">
                 <form action="{{ route('owner.services.store') }}" method="POST">
                     @csrf
                     <div class="bg-white p-8">

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use App\Traits\HasBranch;
 
+use App\Traits\LogsActivity;
+
 class Customer extends Model
 {
-    use HasFactory, HasUuids, HasBranch;
+    use HasFactory, HasUuids, HasBranch, LogsActivity;
 
     protected $guarded = ['id'];
 

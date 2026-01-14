@@ -17,7 +17,7 @@ class PayrollController extends Controller
         $payrolls = Payroll::where('tenant_id', Auth::user()->tenant_id)
             ->with('employee')
             ->latest('period_end')
-            ->get();
+            ->paginate(10);
         return view('owner.payroll.index', compact('payrolls'));
     }
 

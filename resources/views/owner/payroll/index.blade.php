@@ -118,5 +118,11 @@
                 </tbody>
             </table>
         </div>
+
+        @if($payrolls->hasPages())
+            <div class="px-8 py-6 border-t border-slate-50">
+                {{ $payrolls->links() }}
+            </div>
+        @endif
     </div>
 @endsection

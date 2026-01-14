@@ -19,7 +19,7 @@ class AdminUserController extends Controller
             ->where('role', '!=', 'cashier')
             ->whereNull('tenant_id')
             ->orderBy('created_at', 'desc')
-            ->paginate(15);
+            ->paginate(10);
 
         return view('admin.users.index', compact('users'));
     }

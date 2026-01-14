@@ -11,7 +11,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $items = InventoryItem::where('tenant_id', Auth::user()->tenant_id)->get();
+        $items = InventoryItem::where('tenant_id', Auth::user()->tenant_id)->paginate(10);
         return view('owner.inventory.index', compact('items'));
     }
 
