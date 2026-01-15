@@ -127,31 +127,32 @@ class DefaultDataSeeder extends Seeder
             ['id' => 'a0d53578-9831-482b-bf80-a3a028bdbefd', 'name' => 'Pelanggan 14', 'phone' => null],
             ['id' => 'a0d5357f-395c-4037-8819-25bf905f361e', 'name' => 'Pelanggan 15', 'phone' => null],
             ['id' => 'a0d53586-3318-497f-b2e3-9a94332f4921', 'name' => 'Pelanggan 16', 'phone' => null],
-            ['id' => 'a0d53586-68b2-40bb-a266-d33ad0bf18f5', 'name' => 'Pelanggan 16', 'phone' => null],
-            ['id' => 'a0d53590-f452-4abc-b4b8-a37aacac0496', 'name' => 'Pelanggan 17', 'phone' => null],
-            ['id' => 'a0d53597-c233-4e8f-b8d3-315f4cba499a', 'name' => 'Pelanggan 18', 'phone' => null],
-            ['id' => 'a0d5359f-3272-4f95-a0c7-bad0ee4dd175', 'name' => 'Pelanggan 19', 'phone' => null],
-            ['id' => 'a0d535a8-3cbe-4cdc-af90-3c9c0ae3126f', 'name' => 'Pelanggan 20', 'phone' => null],
-            ['id' => 'a0d535b0-c9f9-4f8f-aec5-a9a28b12d52f', 'name' => 'Pelanggan 21', 'phone' => null],
-            ['id' => 'a0d535b7-4ef0-4ab7-bfb6-89c7d8abc7ec', 'name' => 'Pelanggan 22', 'phone' => null],
+            ['id' => 'a0d53586-68b2-40bb-a266-d33ad0bf18f5', 'name' => 'Pelanggan 17', 'phone' => null],
+            ['id' => 'a0d53590-f452-4abc-b4b8-a37aacac0496', 'name' => 'Pelanggan 18', 'phone' => null],
+            ['id' => 'a0d53597-c233-4e8f-b8d3-315f4cba499a', 'name' => 'Pelanggan 19', 'phone' => null],
+            ['id' => 'a0d5359f-3272-4f95-a0c7-bad0ee4dd175', 'name' => 'Pelanggan 20', 'phone' => null],
+            ['id' => 'a0d535a8-3cbe-4cdc-af90-3c9c0ae3126f', 'name' => 'Pelanggan 21', 'phone' => null],
+            ['id' => 'a0d535b0-c9f9-4f8f-aec5-a9a28b12d52f', 'name' => 'Pelanggan 22', 'phone' => null],
+            ['id' => 'a0d535b7-4ef0-4ab7-bfb6-89c7d8abc7ec', 'name' => 'Pelanggan 23', 'phone' => null],
         ];
 
         foreach ($customers as $c) {
-            DB::table('customers')->insert([
-                'id' => $c['id'],
-                'tenant_id' => 'a0d4ffd9-3fc5-4a39-aa0e-cef7c24ffa30',
-                'branch_id' => null,
-                'membership_level_id' => null,
-                'name' => $c['name'],
-                'phone' => $c['phone'],
-                'address' => null,
-                'points' => 0,
-                'balance' => 0.00,
-                'latitude' => null,
-                'longitude' => null,
-                'created_at' => '2026-01-14 00:30:00',
-                'updated_at' => '2026-01-14 00:30:00',
-            ]);
+            DB::table('customers')->updateOrInsert(
+                ['id' => $c['id']],
+                [
+                    'tenant_id' => 'a0d4ffd9-3fc5-4a39-aa0e-cef7c24ffa30',
+                    'branch_id' => null,
+                    'membership_level_id' => null,
+                    'name' => $c['name'],
+                    'phone' => $c['phone'],
+                    'address' => null,
+                    'points' => 0,
+                    'balance' => 0.00,
+                    'latitude' => null,
+                    'longitude' => null,
+                    'updated_at' => now(),
+                ]
+            );
         }
 
         // 6. Employees
@@ -319,17 +320,17 @@ class DefaultDataSeeder extends Seeder
         ]);
 
         // 11. System Settings
-        DB::table('system_settings')->insert([
-            'id' => 1,
-            'key' => 'branch_addon_price',
-            'value' => '50000',
-            'type' => 'decimal',
-            'group' => 'subscription',
-            'label' => 'Biaya Addon Cabang',
-            'description' => 'Biaya tambahan per satu cabang per bulan.',
-            'created_at' => '2026-01-06 02:51:59',
-            'updated_at' => '2026-01-06 02:51:59',
-        ]);
+        DB::table('system_settings')->updateOrInsert(
+            ['key' => 'branch_addon_price'],
+            [
+                'value' => '50000',
+                'type' => 'decimal',
+                'group' => 'subscription',
+                'label' => 'Biaya Addon Cabang',
+                'description' => 'Biaya tambahan per satu cabang per bulan.',
+                'updated_at' => now(),
+            ]
+        );
 
         // 12. Purchase Orders
         DB::table('purchase_orders')->insert([
@@ -343,6 +344,7 @@ class DefaultDataSeeder extends Seeder
                 'payment_method' => 'cash',
                 'paid_amount' => 0.00,
                 'remaining_amount' => 0.00,
+                'due_date' => null, // ✅ TAMBAHAN
                 'created_at' => '2026-01-13 23:04:16',
                 'updated_at' => '2026-01-13 23:04:16',
             ],
@@ -356,6 +358,7 @@ class DefaultDataSeeder extends Seeder
                 'payment_method' => 'cash',
                 'paid_amount' => 32000.00,
                 'remaining_amount' => 0.00,
+                'due_date' => null, // ✅ TAMBAHAN
                 'created_at' => '2026-01-14 01:26:37',
                 'updated_at' => '2026-01-14 01:26:37',
             ],
@@ -374,6 +377,7 @@ class DefaultDataSeeder extends Seeder
                 'updated_at' => '2026-01-14 01:49:26',
             ],
         ]);
+
 
         // 13. Purchase Order Items
         DB::table('purchase_order_items')->insert([
@@ -409,6 +413,7 @@ class DefaultDataSeeder extends Seeder
             [
                 'id' => 'a0d555c7-f418-4aa2-9725-7972b79c1d49',
                 'tenant_id' => 'a0d4ffd9-3fc5-4a39-aa0e-cef7c24ffa30',
+                'customer_id' => null, // ✅ WAJIB
                 'total_price' => 25000.00,
                 'amount_paid' => 0.00,
                 'total_cogs' => 0.00,
@@ -430,6 +435,7 @@ class DefaultDataSeeder extends Seeder
                 'created_at' => '2026-01-14 02:05:20',
             ],
         ]);
+
 
         // 17. Transaction Items
         DB::table('transaction_items')->insert([

@@ -3,8 +3,7 @@
 @section('header')
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <h2 class="text-3xl font-black text-slate-800 tracking-tight">Log Aktivitas</h2>
-            <p class="text-slate-500 font-medium mt-1">Pantau seluruh tindakan pengguna di sistem.</p>
+            <h3 class="text-xl font-extrabold text-slate-800">Log Aktivitas</h3>
         </div>
     </div>
 @endsection
@@ -172,15 +171,15 @@
                 const table = document.createElement('table');
                 table.className = 'w-full text-sm';
                 table.innerHTML = `
-                        <thead>
-                            <tr class="text-left text-[11px] font-black text-slate-400 uppercase tracking-wider">
-                                <th class="pb-4">Field</th>
-                                <th class="pb-4">Lama</th>
-                                <th class="pb-4 text-right">Baru</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50"></tbody>
-                    `;
+                                        <thead>
+                                            <tr class="text-left text-[11px] font-black text-slate-400 uppercase tracking-wider">
+                                                <th class="pb-4">Field</th>
+                                                <th class="pb-4">Lama</th>
+                                                <th class="pb-4 text-right">Baru</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-slate-50"></tbody>
+                                    `;
                 const tbody = table.querySelector('tbody');
 
                 const fields = new Set([...Object.keys(properties.old || {}), ...Object.keys(properties.new || {})]);
@@ -191,10 +190,10 @@
                     const newValue = properties.new ? (properties.new[field] ?? '-') : '-';
 
                     row.innerHTML = `
-                            <td class="py-3 font-bold text-slate-600">${field}</td>
-                            <td class="py-3 text-red-500 font-medium">${oldValue}</td>
-                            <td class="py-3 text-emerald-500 font-black text-right">${newValue}</td>
-                        `;
+                                            <td class="py-3 font-bold text-slate-600">${field}</td>
+                                            <td class="py-3 text-red-500 font-medium">${oldValue}</td>
+                                            <td class="py-3 text-emerald-500 font-black text-right">${newValue}</td>
+                                        `;
                     tbody.appendChild(row);
                 });
                 content.appendChild(table);
